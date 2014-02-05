@@ -12,45 +12,43 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import pl.edu.agh.to.lab3.dataprovider.DataProvider;
-import pl.edu.agh.to.lab3.entity.News;
-import pl.edu.agh.to.lab3.entity.Photo;
-
-public class ApplicationTest {
+public class AdsTest {
     private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     private PrintStream originalOut;
 
-    private TestDataProvider testDataProvider = new TestDataProvider();
+    private Collection<Photo> allPhotos = new ArrayList<Photo>();
 
-    private Application application = new Application(testDataProvider);
+    private Collection<News> allNews = new ArrayList<News>();
+
+    private Ads advertismentBox = new Ads(allPhotos, allNews);
 
     @Test
     public void testDisplayingPromotedNews() {
-        testDataProvider.addNews("PromotedNews", System.currentTimeMillis());
-        application.displayPromotedItems();
+        allNews.add(new News("PromotedNews", System.currentTimeMillis()));
+        advertismentBox.displayPromotedItems();
         assertContentIsDisplayed("PromotedNews");
     }
 
     @Test
     public void testDisplayingPromotedPhoto() {
-        testDataProvider.addPhoto("http://photoUrl", true);
-        application.displayPromotedItems();
+        allPhotos.add(new Photo("http://photoUrl", true));
+        advertismentBox.displayPromotedItems();
         assertContentIsDisplayed("http://photoUrl");
     }
 
     @Test
     public void testNotDisplayingPromotedPhoto() {
-        testDataProvider.addPhoto("http://photoUrl", false);
-        application.displayPromotedItems();
+        allPhotos.add(new Photo("http://photoUrl", false));
+        advertismentBox.displayPromotedItems();
         assertContentIsNotDisplayed("http://photoUrl");
     }
 
     @Test
     public void testNotDisplayingPromotedNews() {
-        testDataProvider.addPhoto("http://photoUrl", true);
-        testDataProvider.addNews("NotPromotedNews", 0);
-        application.displayPromotedItems();
+        allPhotos.add(new Photo("http://photoUrl", true));
+        allNews.add(new News("NotPromotedNews", 0));
+        advertismentBox.displayPromotedItems();
         assertContentIsNotDisplayed("NotPromotedNews");
     }
 
@@ -72,32 +70,5 @@ public class ApplicationTest {
     @After
     public void resetSystemOut() {
         System.setOut(originalOut);
-    }
-
-    private static class TestDataProvider implements DataProvider {
-
-        private final Collection<Photo> photos = new ArrayList<Photo>();
-
-        private final Collection<News> news = new ArrayList<News>();
-
-        @Override
-        public Collection<Photo> getAllPhotos() {
-            return photos;
-        }
-
-        @Override
-        public Collection<News> getAllNews() {
-            return news;
-        }
-
-        private void addPhoto(String url, boolean promoted) {
-            Photo testPhoto = new Photo(url, promoted);
-            photos.add(testPhoto);
-        }
-
-        private void addNews(String newsInfo, long publicationTimestamp) {
-            News testNews = new News(newsInfo, publicationTimestamp);
-            news.add(testNews);
-        }
     }
 }

@@ -1,4 +1,4 @@
-package pl.edu.agh.to.lab3.entity;
+package pl.edu.agh.to.lab3;
 
 public class News {
     private long publicationTimestamp;
