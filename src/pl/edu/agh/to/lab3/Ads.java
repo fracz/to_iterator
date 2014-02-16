@@ -34,7 +34,7 @@ public class Ads {
         }
 
         if (promotedNews.size() < 10) {
-            Iterator<Promotable> iterator = new PromotableIterator(allPhotos);
+            Iterator<Promotable> iterator = new PromotableIterator(allPhotos, allNews);
             while (iterator.hasNext()) {
                 Promotable photo = iterator.next();
                 if (photo.isPromoted()) {
