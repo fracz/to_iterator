@@ -2,6 +2,7 @@ package pl.edu.agh.to.lab3;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
 
 public class Ads {
@@ -16,7 +17,7 @@ public class Ads {
 
     public void displayPromotedItems() {
         ArrayList<News> promotedNews = new ArrayList<News>();
-        ArrayList<Photo> promotedPhotos = new ArrayList<Photo>();
+        ArrayList<Promotable> promotedPhotos = new ArrayList<Promotable>();
 
         for (Collection<News> newsCollection : allNews.values()) {
             for (News news : newsCollection) {
@@ -33,7 +34,9 @@ public class Ads {
         }
 
         if (promotedNews.size() < 10) {
-            for (Photo photo : allPhotos) {
+            Iterator<Promotable> iterator = new PromotableIterator(allPhotos);
+            while (iterator.hasNext()) {
+                Promotable photo = iterator.next();
                 if (photo.isPromoted()) {
                     promotedPhotos.add(photo);
                 }
@@ -50,8 +53,8 @@ public class Ads {
             System.out.println(n.display());
         }
 
-        for (Photo p : promotedPhotos) {
-            System.out.println(p.display());
+        for (Promotable promoted : promotedPhotos) {
+            System.out.println(promoted.display());
         }
     }
 }
