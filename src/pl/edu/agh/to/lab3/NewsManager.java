@@ -32,8 +32,4 @@ public class NewsManager {
             sampleNews.put(category, new ArrayList<News>());
         sampleNews.get(category).add(news);
     }
-
-    public static String renderNI(News news) {
-        return "News: " + news.information;
-    }
 }

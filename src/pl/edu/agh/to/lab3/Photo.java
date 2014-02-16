@@ -10,6 +10,7 @@ public class Photo implements Promotable {
         this.promoted = promoted;
     }
 
+    @Override
     public String display() {
         return "Photo: " + photoUrl;
     }

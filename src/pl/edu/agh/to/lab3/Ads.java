@@ -47,7 +47,7 @@ public class Ads {
         System.out.println("There are " + t + " promoted items to display!");
 
         for (News n : promotedNews) {
-            System.out.println(NewsManager.renderNI(n));
+            System.out.println(n.display());
         }
 
         for (Photo p : promotedPhotos) {
