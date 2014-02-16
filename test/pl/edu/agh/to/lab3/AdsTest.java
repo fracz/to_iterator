@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
@@ -19,13 +21,13 @@ public class AdsTest {
 
     private Collection<Photo> allPhotos = new ArrayList<Photo>();
 
-    private Collection<News> allNews = new ArrayList<News>();
+    private Map<String, Collection<News>> allNews = new HashMap<String, Collection<News>>();
 
     private Ads advertismentBox = new Ads(allPhotos, allNews);
 
     @Test
     public void testDisplayingPromotedNews() {
-        allNews.add(new News("PromotedNews", System.currentTimeMillis()));
+        addNews("Sample", new News("PromotedNews", System.currentTimeMillis()));
         advertismentBox.displayPromotedItems();
         assertContentIsDisplayed("PromotedNews");
     }
@@ -47,7 +49,7 @@ public class AdsTest {
     @Test
     public void testNotDisplayingPromotedNews() {
         allPhotos.add(new Photo("http://photoUrl", true));
-        allNews.add(new News("NotPromotedNews", 0));
+        addNews("Sample", new News("NotPromotedNews", 0));
         advertismentBox.displayPromotedItems();
         assertContentIsNotDisplayed("NotPromotedNews");
     }
@@ -70,5 +72,11 @@ public class AdsTest {
     @After
     public void resetSystemOut() {
         System.setOut(originalOut);
+    }
+
+    private void addNews(String category, News news) {
+        if (!allNews.containsKey(category))
+            allNews.put(category, new ArrayList<News>());
+        allNews.get(category).add(news);
     }
 }
