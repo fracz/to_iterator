@@ -34,7 +34,7 @@ public class Ads {
 
         if (promotedNews.size() < 10) {
             for (Photo photo : allPhotos) {
-                if (photo.promoted) {
+                if (photo.isPromoted()) {
                     promotedPhotos.add(photo);
                 }
                 if (promotedNews.size() + promotedPhotos.size() >= 10) {
