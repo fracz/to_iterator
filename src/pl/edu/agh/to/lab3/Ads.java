@@ -15,20 +15,18 @@ public class Ads {
     }
 
     public void displayPromotedItems() {
-        ArrayList<Promotable> promoted = new ArrayList<Promotable>();
-        PromotableCollection promotableCollection = new PromotableCollection(allPhotos, allNews);
+        ArrayList<Promotable> promotedList = new ArrayList<Promotable>();
+        PromotedCollection promotedCollection = new PromotedCollection(allPhotos, allNews);
 
-        for (Promotable promotable : promotableCollection) {
-            if (promotable.isPromoted()) {
-                promoted.add(promotable);
-                if (promoted.size() > 10)
-                    break;
-            }
+        for (Promotable promotedItem : promotedCollection) {
+            promotedList.add(promotedItem);
+            if (promotedList.size() > 10)
+                break;
         }
 
-        System.out.println("There are " + promoted.size() + " promoted items to display!");
+        System.out.println("There are " + promotedList.size() + " promoted items to display!");
 
-        for (Promotable promotedItem : promoted) {
+        for (Promotable promotedItem : promotedList) {
             System.out.println(promotedItem.display());
         }
     }
