@@ -16,45 +16,20 @@ public class Ads {
     }
 
     public void displayPromotedItems() {
-        ArrayList<News> promotedNews = new ArrayList<News>();
-        ArrayList<Promotable> promotedPhotos = new ArrayList<Promotable>();
+        ArrayList<Promotable> promoted = new ArrayList<Promotable>();
+        Iterator<Promotable> iterator = new PromotableIterator(allPhotos, allNews);
 
-        for (Collection<News> newsCollection : allNews.values()) {
-            for (News news : newsCollection) {
-                if (news.isPromoted()) {
-                    promotedNews.add(news);
-                }
-                if (promotedNews.size() >= 10) {
-                    break;
-                }
-            }
-            if (promotedNews.size() >= 10) {
-                break;
+        while (iterator.hasNext() && promoted.size() < 10) {
+            Promotable promotable = iterator.next();
+            if (promotable.isPromoted()) {
+                promoted.add(promotable);
             }
         }
 
-        if (promotedNews.size() < 10) {
-            Iterator<Promotable> iterator = new PromotableIterator(allPhotos, allNews);
-            while (iterator.hasNext()) {
-                Promotable photo = iterator.next();
-                if (photo.isPromoted()) {
-                    promotedPhotos.add(photo);
-                }
-                if (promotedNews.size() + promotedPhotos.size() >= 10) {
-                    break;
-                }
-            }
-        }
+        System.out.println("There are " + promoted.size() + " promoted items to display!");
 
-        int t = promotedNews.size() + promotedPhotos.size();
-        System.out.println("There are " + t + " promoted items to display!");
-
-        for (News n : promotedNews) {
-            System.out.println(n.display());
-        }
-
-        for (Promotable promoted : promotedPhotos) {
-            System.out.println(promoted.display());
+        for (Promotable promotedItem : promoted) {
+            System.out.println(promotedItem.display());
         }
     }
 }
