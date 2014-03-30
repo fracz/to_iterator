@@ -6,9 +6,9 @@ import java.util.Map;
 public class Application {
 
     public static void main(String[] args) {
-        Collection<Photo> photos = new PhotoProvider().findPhotos();
-        Map<String, Collection<News>> news = new NewsManager().getAllNews();
-        Ads advertismentBox = new Ads(photos, news);
-        advertismentBox.displayPromotedItems();
+        Collection<Person> persons = new PersonDataProvider().getAllCracovCitizens();
+        Map<String, Collection<Prisoner>> prisoners = new PrisonersDatabase().findAll();
+        Finder suspects = new Finder(persons, prisoners);
+        suspects.displayAllSuspectsWithName("Janusz");
     }
 }
