@@ -14,13 +14,17 @@ public class Finder {
         this.allPrisoners = allPrisoners;
     }
 
+    public Finder(PersonDataProvider personDataProvider, PrisonersDatabase prisonersDatabase) {
+        this(personDataProvider.getAllCracovCitizens(), prisonersDatabase.findAll());
+    }
+
     public void displayAllSuspectsWithName(String name) {
         ArrayList<Prisoner> suspectedPrisoners = new ArrayList<Prisoner>();
         ArrayList<Person> suspectedPersons = new ArrayList<Person>();
 
         for (Collection<Prisoner> prisonerCollection : allPrisoners.values()) {
             for (Prisoner prisoner : prisonerCollection) {
-                if (!prisoner.isJailedNow() && prisoner.name.equals(name)) {
+                if (!prisoner.czyMoglbyEwentualnieBycPodejrzany() && prisoner.name.equals(name)) {
                     suspectedPrisoners.add(prisoner);
                 }
                 if (suspectedPrisoners.size() >= 10) {
@@ -34,7 +38,7 @@ public class Finder {
 
         if (suspectedPrisoners.size() < 10) {
             for (Person person : allPersons) {
-                if (person.getAge() > 18 && person.getFirstname().equals(name)) {
+                if (person.getAge() > 18 && person.firstname().equals(name)) {
                     suspectedPersons.add(person);
                 }
                 if (suspectedPrisoners.size() + suspectedPersons.size() >= 10) {

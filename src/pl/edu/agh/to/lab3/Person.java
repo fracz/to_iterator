@@ -17,12 +17,12 @@ public class Person {
         return age;
     }
 
-    public String getFirstname() {
+    public String firstname() {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public String middlename() {
+        return lastname;
     }
 
     public String display() {

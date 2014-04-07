@@ -18,7 +18,7 @@ public class Prisoner {
         this.senteceDuration = sentenceDuration;
     }
 
-    public boolean isJailedNow() {
+    public boolean czyMoglbyEwentualnieBycPodejrzany() {
         return judgementYear + senteceDuration >= CURRENT_YEAR;
     }
 }
