@@ -27,7 +27,7 @@ public class FinderTest {
 
     @Test
     public void testDisplayingNotJailedPrisoner() {
-        addPrisoner("Wiezeienie stanowe", new Prisoner("Jan", "Kowalski", 2000, 1));
+        addPrisoner("Wiezeienie stanowe", new Prisoner("Jan", "Kowalski", "802104543357", 2000, 1));
         suspectFinder.displayAllSuspectsWithName("Jan");
         assertContentIsDisplayed("Jan Kowalski");
     }
@@ -49,7 +49,7 @@ public class FinderTest {
     @Test
     public void testNotDisplayingJailedPrisoner() {
         allPersons.add(new Person("Jan", "Kowalski", 20));
-        addPrisoner("Wiezeienie stanowe", new Prisoner("Jan", "Kowalski2", 2000, 20));
+        addPrisoner("Wiezeienie stanowe", new Prisoner("Jan", "Kowalski2", "802104543357", 2000, 20));
         suspectFinder.displayAllSuspectsWithName("Jan");
         assertContentIsNotDisplayed("Jan Kowalski2");
     }
